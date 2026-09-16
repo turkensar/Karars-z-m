@@ -1,0 +1,36 @@
+{% load poll_extras %}
+<article class="poll-card" data-poll-id="{{ poll.id }}">
+    <p class="poll-meta">
+        <a href="{% url 'polls:profile' poll.author.username %}">@{{ poll.author.username }}</a>
+        · {{ poll.created_at|timesince }} önce
+    </p>
+    <h2 class="poll-question"><a href="{% url 'polls:poll_detail' poll.id %}">{{ poll.question }}</a></h2>
+
+    {% if show_results %}
+        <div class="poll-results">
+            {% for option in poll.options.all %}
+            {% with result=results_by_option|get_item:option.id %}
+            <div class="poll-result-row{% if voted_option_id == option.id %} poll-result-row-voted{% endif %}">
+                <div class="poll-bar" style="width: {{ result.percent }}%;"></div>
+                <span class="poll-option-text">{{ option.text }}{% if voted_option_id == option.id %} ✓ senin oyun{% endif %}</span>
+                <span class="poll-option-percent">{{ result.percent }}%</span>
+            </div>
+            {% endwith %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <form class="vote-form" method="post" action="{% url 'polls:vote_api' poll.id %}" data-poll-id="{{ poll.id }}">
+            {% csrf_token %}
+            <div class="poll-options">
+                {% for option in poll.options.all %}
+                <button type="submit" name="option_id" value="{{ option.id }}" class="poll-option-button">{{ option.text }}</button>
+                {% endfor %}
+            </div>
+        </form>
+    {% endif %}
+
+    <p class="poll-total">
+        {% if poll.total_votes == 0 %}İlk oyu sen ver{% else %}{{ poll.total_votes }} oy{% endif %}
+        {% if poll.is_closed %}· Kapatıldı{% endif %}
+    </p>
+</article>

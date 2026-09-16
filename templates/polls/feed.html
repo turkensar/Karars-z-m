@@ -1,5 +1,43 @@
 {% extends "base.html" %}
+{% load poll_extras static %}
 
 {% block content %}
-<h1>Kararsızım</h1>
+<nav class="sort-tabs">
+    <a href="?sirala=yeni{% if category %}&kategori={{ category }}{% endif %}" class="{% if sort == 'yeni' %}active{% endif %}">Yeni</a>
+    <a href="?sirala=populer{% if category %}&kategori={{ category }}{% endif %}" class="{% if sort == 'populer' %}active{% endif %}">Popüler</a>
+    <a href="?sirala=sessiz{% if category %}&kategori={{ category }}{% endif %}" class="{% if sort == 'sessiz' %}active{% endif %}">Sessiz</a>
+</nav>
+
+<nav class="category-chips">
+    <a href="?sirala={{ sort }}" class="{% if not category %}active{% endif %}">Tümü</a>
+    {% for value, label in categories %}
+    <a href="?sirala={{ sort }}&kategori={{ value }}" class="{% if category == value %}active{% endif %}">{{ label }}</a>
+    {% endfor %}
+</nav>
+
+{% if page.object_list %}
+    {% for poll in page.object_list %}
+        {% with ctx=poll_context|get_item:poll.id %}
+        {% include "partials/poll_card.html" with show_results=ctx.show_results voted_option_id=ctx.voted_option_id results_by_option=ctx.results_by_option %}
+        {% endwith %}
+    {% endfor %}
+{% else %}
+    <p class="empty-state">Burada henüz anket yok. İlkini sen aç.</p>
+{% endif %}
+
+{% if page.has_other_pages %}
+<nav class="pagination">
+    {% if page.has_previous %}
+        <a href="?sayfa={{ page.previous_page_number }}&sirala={{ sort }}{% if category %}&kategori={{ category }}{% endif %}">Önceki</a>
+    {% endif %}
+    <span>{{ page.number }} / {{ page.paginator.num_pages }}</span>
+    {% if page.has_next %}
+        <a href="?sayfa={{ page.next_page_number }}&sirala={{ sort }}{% if category %}&kategori={{ category }}{% endif %}">Sonraki</a>
+    {% endif %}
+</nav>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/vote.js' %}"></script>
 {% endblock %}

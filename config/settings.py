@@ -42,6 +42,12 @@ CSRF_TRUSTED_ORIGINS = [
     if origin.strip()
 ]
 
+ANON_KEY_SALT = os.environ.get('ANON_KEY_SALT', '')
+
+# Bolum 7.3: anonim oy cerezinin omru
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 365
+SESSION_COOKIE_SAMESITE = 'Lax'
+
 
 # Application definition
 

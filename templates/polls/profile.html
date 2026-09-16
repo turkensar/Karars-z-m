@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load poll_extras static %}
+
+{% block title %}@{{ profile_user.username }} – Kararsızım{% endblock %}
+
+{% block content %}
+<h1>@{{ profile_user.username }}</h1>
+
+{% if page.object_list %}
+    {% for poll in page.object_list %}
+        {% with ctx=poll_context|get_item:poll.id %}
+        {% include "partials/poll_card.html" with show_results=ctx.show_results voted_option_id=ctx.voted_option_id results_by_option=ctx.results_by_option %}
+        {% endwith %}
+    {% endfor %}
+{% else %}
+    <p class="empty-state">Bu kullanıcının henüz anketi yok.</p>
+{% endif %}
+
+{% if page.has_other_pages %}
+<nav class="pagination">
+    {% if page.has_previous %}<a href="?sayfa={{ page.previous_page_number }}">Önceki</a>{% endif %}
+    <span>{{ page.number }} / {{ page.paginator.num_pages }}</span>
+    {% if page.has_next %}<a href="?sayfa={{ page.next_page_number }}">Sonraki</a>{% endif %}
+</nav>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/vote.js' %}"></script>
+{% endblock %}
