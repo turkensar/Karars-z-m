@@ -560,14 +560,19 @@ Her faz ayrı bir oturumda yapılabilir. Fazın sonunda "Bitti kriterleri" sağl
 
 **Amaç:** Canlıya almak.
 
+> **Not (2026-09-16):** Bu bölüm yazıldığında Vercel'in Python runtime'ı `api/index.py`
+> + `vercel.json` (`builds`/`routes`) ile elle yapılandırılıyordu. Faz 7 uygulanırken
+> Vercel'in güncel dokümanı kontrol edildi ve Vercel'in artık Django için **zero-config**
+> desteği olduğu görüldü: `manage.py`'ı bulup `WSGI_APPLICATION`'dan giriş noktasını
+> otomatik okuyor, `STATIC_ROOT` tanımlıysa `collectstatic`'i build sırasında kendisi
+> çalıştırıp dosyaları kendi CDN'inden sunuyor. Kullanıcı onayıyla güncel yönteme
+> geçildi: **`api/index.py` ve `vercel.json` oluşturulmadı.** WhiteNoise sadece yerel
+> `manage.py runserver` için middleware olarak duruyor, production'da Vercel'in CDN'i
+> devreye giriyor (WhiteNoise'un kendi desteklediği bir depolama sınıfı olduğu için bu
+> ikisi çakışmıyor).
+
 **Yapılacaklar:**
-- `api/index.py`:
-  ```python
-  from config.wsgi import application
-  app = application
-  ```
-- `vercel.json` ile Python runtime ve yönlendirme yapılandırması.
-- WhiteNoise: `MIDDLEWARE` içinde `SecurityMiddleware`'den hemen sonra, `STATICFILES_STORAGE` ayarı, build sırasında `collectstatic`.
+- WhiteNoise: `MIDDLEWARE` içinde `SecurityMiddleware`'den hemen sonra, `STORAGES["staticfiles"]` ayarı (`STATICFILES_STORAGE`'ın Django 4.2+ karşılığı), `STATIC_ROOT` tanımlı (Vercel `collectstatic`'i otomatik çalıştırıyor).
 - Üretim ayarları: `DEBUG=False`, `ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS` (Vercel alan adı), `SECURE_PROXY_SSL_HEADER`, `SESSION_COOKIE_SECURE`, `CSRF_COOKIE_SECURE`.
 - Vercel ortam değişkenleri listesi kullanıcıya verilir.
 
