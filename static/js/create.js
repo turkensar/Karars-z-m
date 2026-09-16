@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         var removeButton = document.createElement("button");
         removeButton.type = "button";
-        removeButton.className = "remove-option";
+        removeButton.className = "remove-option btn btn-ghost";
         removeButton.textContent = "Kaldır";
         row.appendChild(removeButton);
 

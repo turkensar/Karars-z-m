@@ -3,7 +3,7 @@
 {% block title %}Giriş yap – Kararsızım{% endblock %}
 
 {% block content %}
-<h1>Giriş yap</h1>
+<h1 class="page-title">Giriş yap</h1>
 <form method="post" novalidate>
     {% csrf_token %}
     {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
@@ -19,7 +19,7 @@
             {% for error in field.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
         </div>
     {% endfor %}
-    <button type="submit">Giriş yap</button>
+    <button type="submit" class="btn">Giriş yap</button>
 </form>
 <p>Hesabın yok mu? <a href="{% url 'accounts:register' %}{% if next %}?next={{ next }}{% endif %}">Kayıt ol</a></p>
 {% endblock %}

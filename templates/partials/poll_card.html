@@ -11,9 +11,16 @@
             {% for option in poll.options.all %}
             {% with result=results_by_option|get_item:option.id %}
             <div class="poll-result-row{% if voted_option_id == option.id %} poll-result-row-voted{% endif %}">
-                <div class="poll-bar" style="width: {{ result.percent }}%;"></div>
-                <span class="poll-option-text">{{ option.text }}{% if voted_option_id == option.id %} ✓ senin oyun{% endif %}</span>
-                <span class="poll-option-percent">{{ result.percent }}%</span>
+                <div class="poll-result-label">
+                    <span class="poll-option-text">
+                        {{ option.text }}
+                        {% if voted_option_id == option.id %}<span class="poll-voted-badge">✓ senin oyun</span>{% endif %}
+                    </span>
+                    <span class="poll-option-percent">{{ result.percent }}%</span>
+                </div>
+                <div class="poll-bar-track">
+                    <div class="poll-bar-fill" style="width: {{ result.percent }}%;"></div>
+                </div>
             </div>
             {% endwith %}
             {% endfor %}

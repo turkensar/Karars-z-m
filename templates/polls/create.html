@@ -4,7 +4,7 @@
 {% block title %}Anket oluştur – Kararsızım{% endblock %}
 
 {% block content %}
-<h1>Anket oluştur</h1>
+<h1 class="page-title">Anket oluştur</h1>
 <form method="post" id="poll-create-form" novalidate>
     {% csrf_token %}
     {% if form.non_field_errors %}
@@ -25,11 +25,12 @@
     </div>
 
     <div class="form-field">
+        <label>Seçenekler</label>
         <div id="option-list">
             {% for value in raw_options %}
             <div class="option-row">
                 <input type="text" name="options" value="{{ value }}" maxlength="60" placeholder="Seçenek">
-                <button type="button" class="remove-option">Kaldır</button>
+                <button type="button" class="remove-option btn btn-ghost">Kaldır</button>
             </div>
             {% endfor %}
         </div>
@@ -38,10 +39,10 @@
                 {% for error in option_errors %}<li>{{ error }}</li>{% endfor %}
             </ul>
         {% endif %}
-        <button type="button" id="add-option">Seçenek ekle</button>
+        <button type="button" id="add-option" class="btn btn-ghost">Seçenek ekle</button>
     </div>
 
-    <button type="submit">Anket aç</button>
+    <button type="submit" class="btn">Anket aç</button>
 </form>
 {% endblock %}
 

@@ -4,7 +4,7 @@
 {% block title %}@{{ profile_user.username }} – Kararsızım{% endblock %}
 
 {% block content %}
-<h1>@{{ profile_user.username }}</h1>
+<h1 class="page-title">@{{ profile_user.username }}</h1>
 
 {% if page.object_list %}
     {% for poll in page.object_list %}

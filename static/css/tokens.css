@@ -1,0 +1,30 @@
+:root {
+    --zemin: #F2EFE9;
+    --yuzey: #FFFFFF;
+    --murekkep: #171420;
+    --murekkep-soft: #6B6577;
+    --cizgi: #171420;
+
+    --secim-1: #2D4BFF;
+    --secim-2: #FF5436;
+    --secim-3: #00A676;
+    --secim-4: #B14BFF;
+    --secim-5: #FFB300;
+
+    --hata: #C7203C;
+    --basari: #00A676;
+
+    --radius-kart: 14px;
+    --radius-buton: 10px;
+    --radius-bar: 6px;
+    --radius-rozet: 999px;
+
+    --font-baslik: 'Bricolage Grotesque', system-ui, sans-serif;
+    --font-govde: 'Inter Tight', system-ui, sans-serif;
+
+    --olcek-soru-kart: 28px;
+    --olcek-soru-detay: 40px;
+    --olcek-secenek: 17px;
+    --olcek-govde: 16px;
+    --olcek-yardimci: 13px;
+}

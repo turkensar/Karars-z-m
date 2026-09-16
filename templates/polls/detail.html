@@ -4,20 +4,22 @@
 {% block title %}{{ poll.question }} – Kararsızım{% endblock %}
 
 {% block content %}
-{% include "partials/poll_card.html" with show_results=show_results voted_option_id=voted_option_id results_by_option=results_by_option %}
+<div class="poll-detail-wrap">
+    {% include "partials/poll_card.html" with show_results=show_results voted_option_id=voted_option_id results_by_option=results_by_option %}
+</div>
 
 {% if user.is_authenticated and user.id == poll.author_id %}
 <div class="owner-actions">
     {% if not poll.is_closed %}
     <form action="{% url 'polls:poll_close' poll.id %}" method="post" class="inline-form">
         {% csrf_token %}
-        <button type="submit">Anketi kapat</button>
+        <button type="submit" class="btn btn-ghost">Anketi kapat</button>
     </form>
     {% endif %}
     <form action="{% url 'polls:poll_delete' poll.id %}" method="post" class="inline-form"
           onsubmit="return confirm('Bu anket ve tüm oyları kalıcı olarak silinecek. Emin misin?');">
         {% csrf_token %}
-        <button type="submit">Anketi sil</button>
+        <button type="submit" class="btn btn-ghost">Anketi sil</button>
     </form>
 </div>
 {% endif %}

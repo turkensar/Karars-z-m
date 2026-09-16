@@ -1,0 +1,182 @@
+/* Genel buton */
+
+.btn {
+    display: inline-block;
+    font-family: var(--font-govde);
+    font-weight: 600;
+    font-size: var(--olcek-govde);
+    padding: 10px 16px;
+    border: 2px solid var(--cizgi);
+    border-radius: var(--radius-buton);
+    background: var(--murekkep);
+    color: var(--yuzey);
+    box-shadow: 4px 4px 0 var(--murekkep);
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 2px 2px 0 var(--murekkep);
+}
+
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 4px 4px 0 var(--murekkep);
+}
+
+.btn-ghost {
+    background: var(--yuzey);
+    color: var(--murekkep);
+    box-shadow: 4px 4px 0 var(--murekkep);
+}
+
+/* Anket karti */
+
+.poll-card {
+    background: var(--yuzey);
+    border: 2px solid var(--cizgi);
+    border-radius: var(--radius-kart);
+    box-shadow: 4px 4px 0 var(--murekkep);
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.poll-meta {
+    font-size: var(--olcek-yardimci);
+    color: var(--murekkep-soft);
+    margin: 0 0 8px;
+}
+
+.poll-meta a {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--murekkep-soft);
+}
+
+.poll-question {
+    font-size: var(--olcek-soru-kart);
+    line-height: 1.15;
+    margin-bottom: 14px;
+}
+
+.poll-question a {
+    text-decoration: none;
+}
+
+.poll-detail-wrap .poll-question {
+    font-size: var(--olcek-soru-detay);
+    line-height: 1.1;
+}
+
+.poll-options,
+.poll-results {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+/* Oy oncesi butonlar */
+
+.poll-option-button {
+    text-align: left;
+    font-family: var(--font-govde);
+    font-size: var(--olcek-secenek);
+    padding: 12px 14px;
+    background: var(--yuzey);
+    border: 2px solid var(--cizgi);
+    border-left-width: 6px;
+    border-radius: var(--radius-buton);
+    cursor: pointer;
+    transition: transform 150ms ease, box-shadow 150ms ease;
+    box-shadow: 3px 3px 0 var(--murekkep);
+}
+
+.poll-option-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 1px 1px 0 var(--murekkep);
+}
+
+.poll-options .poll-option-button:nth-child(1) { border-left-color: var(--secim-1); }
+.poll-options .poll-option-button:nth-child(2) { border-left-color: var(--secim-2); }
+.poll-options .poll-option-button:nth-child(3) { border-left-color: var(--secim-3); }
+.poll-options .poll-option-button:nth-child(4) { border-left-color: var(--secim-4); }
+.poll-options .poll-option-button:nth-child(5) { border-left-color: var(--secim-5); }
+
+/* Oy sonrasi sonuc satirlari */
+
+.poll-result-row {
+    font-size: var(--olcek-secenek);
+}
+
+.poll-result-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.poll-option-percent {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.poll-bar-track {
+    height: 10px;
+    background: var(--zemin);
+    border: 2px solid var(--cizgi);
+    border-radius: var(--radius-bar);
+    overflow: hidden;
+}
+
+.poll-bar-fill {
+    height: 100%;
+    background: var(--murekkep-soft);
+    transition: width 300ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.poll-results .poll-result-row:nth-child(1) .poll-bar-fill { background: var(--secim-1); }
+.poll-results .poll-result-row:nth-child(2) .poll-bar-fill { background: var(--secim-2); }
+.poll-results .poll-result-row:nth-child(3) .poll-bar-fill { background: var(--secim-3); }
+.poll-results .poll-result-row:nth-child(4) .poll-bar-fill { background: var(--secim-4); }
+.poll-results .poll-result-row:nth-child(5) .poll-bar-fill { background: var(--secim-5); }
+
+.poll-result-row-voted .poll-bar-track {
+    border-color: var(--basari);
+}
+
+.poll-voted-badge {
+    display: inline-block;
+    font-size: var(--olcek-yardimci);
+    font-weight: 600;
+    color: var(--basari);
+    margin-left: 4px;
+}
+
+.poll-total {
+    font-size: var(--olcek-yardimci);
+    color: var(--murekkep-soft);
+    margin: 0;
+}
+
+.owner-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: -8px;
+    margin-bottom: 20px;
+}
+
+.owner-actions .btn {
+    font-size: var(--olcek-yardimci);
+    padding: 8px 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .poll-bar-fill {
+        transition: none;
+    }
+}
