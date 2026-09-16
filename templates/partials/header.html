@@ -1,6 +1,7 @@
 <header class="top-bar">
     <a href="{% url 'polls:feed' %}" class="brand">Kararsızım</a>
     <nav class="top-bar-nav">
+        <a href="{% url 'polls:poll_create' %}">Anket aç</a>
         {% if user.is_authenticated %}
             <span class="username">@{{ user.username }}</span>
             <form action="{% url 'accounts:logout' %}" method="post" class="inline-form">

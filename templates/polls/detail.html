@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}{{ poll.question }} – Kararsızım{% endblock %}
+
+{% block content %}
+<h1>{{ poll.question }}</h1>
+<ul>
+    {% for option in poll.options.all %}
+    <li>{{ option.text }}</li>
+    {% endfor %}
+</ul>
+<p>{{ poll.total_votes }} oy</p>
+{% endblock %}
