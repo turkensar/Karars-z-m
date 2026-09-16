@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{% static 'css/components.css' %}">
 </head>
 <body>
+    {% include "partials/header.html" %}
+    {% include "partials/toast.html" %}
     {% block content %}{% endblock %}
 </body>
 </html>

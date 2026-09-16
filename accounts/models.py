@@ -17,8 +17,12 @@ class User(AbstractUser):
         unique=True,
         validators=[username_validator],
         help_text="3-24 karakter, sadece küçük harf, rakam, _ ve . içerebilir.",
+        error_messages={"unique": "Bu kullanıcı adı alınmış. Başka bir tane dene."},
     )
-    email = models.EmailField(unique=True)
+    email = models.EmailField(
+        unique=True,
+        error_messages={"unique": "Bu e-posta zaten kayıtlı."},
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     @classmethod

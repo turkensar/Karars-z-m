@@ -1,0 +1,14 @@
+<header class="top-bar">
+    <a href="{% url 'polls:feed' %}" class="brand">Kararsızım</a>
+    <nav class="top-bar-nav">
+        {% if user.is_authenticated %}
+            <span class="username">@{{ user.username }}</span>
+            <form action="{% url 'accounts:logout' %}" method="post" class="inline-form">
+                {% csrf_token %}
+                <button type="submit">Çıkış yap</button>
+            </form>
+        {% else %}
+            <a href="{% url 'accounts:login' %}">Giriş yap</a>
+        {% endif %}
+    </nav>
+</header>

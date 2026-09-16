@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Kayıt ol – Kararsızım{% endblock %}
+
+{% block content %}
+<h1>Kayıt ol</h1>
+<form method="post" novalidate>
+    {% csrf_token %}
+    {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+    {% if form.non_field_errors %}
+        <ul class="errorlist">
+            {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+        </ul>
+    {% endif %}
+    {% for field in form %}
+        <div class="form-field">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% for error in field.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+        </div>
+    {% endfor %}
+    <button type="submit">Kayıt ol</button>
+</form>
+<p>Zaten hesabın var mı? <a href="{% url 'accounts:login' %}{% if next %}?next={{ next }}{% endif %}">Giriş yap</a></p>
+{% endblock %}

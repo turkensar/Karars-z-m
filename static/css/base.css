@@ -1,0 +1,55 @@
+/* Minimal placeholder layout, replaced with real design in Faz 6. */
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0 16px;
+}
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+}
+
+.top-bar-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.inline-form {
+    display: inline;
+}
+
+.form-field {
+    margin-bottom: 12px;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.field-error,
+.errorlist {
+    color: #c7203c;
+    margin: 4px 0;
+}
+
+.errorlist {
+    list-style: none;
+    padding: 0;
+}
+
+.toast-list {
+    list-style: none;
+    padding: 0;
+}
+
+.toast {
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border: 1px solid currentColor;
+}
